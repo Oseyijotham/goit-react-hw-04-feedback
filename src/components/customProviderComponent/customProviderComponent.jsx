@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 const UserContext = createContext();
 
@@ -11,6 +13,9 @@ const [neutral, setNeutral] = useState(0);
 const [bad, setBad] = useState(0);
 const options = ['Good', 'Neutral', 'Bad'];
 const message = 'There is no feedback';
+const myRef = useRef();
+
+useEffect(() => myRef.current.focus(), []); // I used myRef to focus on the Neutral button after mounting, see in the FeedbackOptions component
 
   const settingGood = () => {
     setGood(good + 1);
@@ -63,6 +68,7 @@ const message = 'There is no feedback';
         good,
         neutral,
         bad,
+        myRef,
         settingGood,
         settingNeutral,
         settingBad,
